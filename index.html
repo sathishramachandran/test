@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JS Utilities — Interactive</title>
+
+ <style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #816666;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background: #37393b;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.result {
+  margin-top: 10px;
+  background: #eef2ff;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccd5ff;
+  min-height: 20px;
+}
+
+.hint {
+  color: #666;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+ </style>
+</head>
+
+<body>
+
+  <h1>JS Utilities — Enter values below</h1>
+
+
+  <div class="card">
+    <label>1. Reverse a String</label>
+    <input id="reverseInput" type="text" placeholder="Type text, e.g. hello" />
+    <button onclick="handleReverse()">Reverse</button>
+    <div id="reverseResult" class="result"></div>
+  </div>
+
+  <div class="card">
+    <label>2. Count Vowels</label>
+    <input id="vowelInput" type="text" placeholder="Type text, e.g. Education" />
+    <button onclick="handleCountVowels()">Count</button>
+    <div id="vowelResult" class="result"></div>
+  </div>
+
+  <div class="card">
+    <label>3. Find the Longest Word</label>
+    <input id="longestInput" type="text" placeholder="Type a sentence" />
+    <button onclick="handleLongest()">Find</button>
+    <div id="longestResult" class="result"></div>
+  </div>
+
+
+  <div class="card">
+    <label>4. Check for Palindrome</label>
+    <input id="palindromeInput" type="text" placeholder="Type a string, e.g. madam" />
+    <div class="hint">Case sensitive. You can modify script to normalize.</div>
+    <button onclick="handlePalindrome()">Check</button>
+    <div id="palindromeResult" class="result"></div>
+  </div>
+
+
+  <div class="card">
+    <label>5. Remove Duplicates from an Array</label>
+    <input id="duplicatesInput" type="text" placeholder="Enter: 1,2,2,3" />
+    <button onclick="handleRemoveDuplicates()">Remove Duplicates</button>
+    <div id="duplicatesResult" class="result"></div>
+  </div>
+
+
+  <div class="card">
+    <label>6. Find Second Largest Number</label>
+    <input id="secondLargestInput" type="text" placeholder="10,5,8,20,15" />
+    <button onclick="handleSecondLargest()">Find</button>
+    <div id="secondLargestResult" class="result"></div>
+  </div>
+
+
+  <div class="card">
+    <label>7. Count Character Frequency</label>
+    <input id="charFreqInput" type="text" placeholder="apple" />
+    <button onclick="handleCharFreq()">Count</button>
+    <div id="charFreqResult" class="result"></div>
+  </div>
+
+  <div class="card">
+    <label>8. Sum of Digits</label>
+    <input id="sumDigitsInput" type="number" placeholder="1234" />
+    <button onclick="handleSumDigits()">Sum</button>
+    <div id="sumDigitsResult" class="result"></div>
+  </div>
+
+
+  <div class="card">
+    <label>9. Sort Words Alphabetically</label>
+    <input id="sortWordsInput" type="text" placeholder="banana apple mango" />
+    <button onclick="handleSortWords()">Sort</button>
+    <div id="sortWordsResult" class="result"></div>
+  </div>
+
+
+  <div class="card">
+    <label>10. Find Missing Number (1 to n)</label>
+    <input id="missingInput" type="text" placeholder="1,2,4,5" />
+    <button onclick="handleFindMissing()">Find Missing</button>
+    <div id="missingResult" class="result"></div>
+  </div>
+
+<script>
+  function reverseString(str) { return str.split("").reverse().join(""); }
+
+  function countVowels(str) {
+    let vowels = "aeiou";
+    let count = 0;
+    for (let char of str.toLowerCase()) {
+      if (vowels.includes(char)) count++;
+    }
+    return count;
+  }
+
+  function findLongestWord(sentence) {
+    let words = sentence.split(" ");
+    let longest = "";
+    for (let word of words) {
+      if (word.length > longest.length) longest = word;
+    }
+    return longest;
+  }
+
+  function isPalindrome(str) {
+    let reversed = str.split("").reverse().join("");
+    return str === reversed;
+  }
+
+  function removeDuplicates(arr) { return [...new Set(arr)]; }
+
+  function secondLargest(arr) {
+    let unique = [...new Set(arr)];
+    unique.sort((a, b) => b - a);
+    return unique[1];
+  }
+
+  function charFrequency(str) {
+    let freq = {};
+    for (let char of str) {
+      freq[char] = (freq[char] || 0) + 1;
+    }
+    return freq;
+  }
+
+  function sumOfDigits(num) {
+    return num.toString().split("").reduce((sum, digit) => sum + Number(digit), 0);
+  }
+
+  function sortWords(sentence) {
+    return sentence.split(" ").sort().join(" ");
+  }
+
+  function findMissingNumber(arr) {
+    let n = arr.length + 1;
+    let total = (n * (n + 1)) / 2;
+    let sum = arr.reduce((a, b) => a + b, 0);
+    return total - sum;
+  }
+
+  /* Helpers */
+  function parseNumberArray(input) {
+    return input.split(",").map(s => Number(s.trim())).filter(x => !isNaN(x));
+  }
+
+  /* Button Handlers */
+  function handleReverse() {
+    const v = document.getElementById("reverseInput").value;
+    document.getElementById("reverseResult").textContent = reverseString(v);
+  }
+
+  function handleCountVowels() {
+    const v = document.getElementById("vowelInput").value;
+    document.getElementById("vowelResult").textContent = countVowels(v);
+  }
+
+  function handleLongest() {
+    const v = document.getElementById("longestInput").value;
+    document.getElementById("longestResult").textContent =
+      findLongestWord(v) || "(no words)";
+  }
+
+  function handlePalindrome() {
+    const v = document.getElementById("palindromeInput").value;
+    document.getElementById("palindromeResult").textContent =
+      isPalindrome(v) ? "✅ Palindrome" : "❌ Not a palindrome";
+  }
+
+  function handleRemoveDuplicates() {
+    const v = document.getElementById("duplicatesInput").value;
+    const arr = v.split(",").map(s => s.trim());
+    document.getElementById("duplicatesResult").textContent =
+      JSON.stringify(removeDuplicates(arr));
+  }
+
+  function handleSecondLargest() {
+    const v = document.getElementById("secondLargestInput").value;
+    const arr = parseNumberArray(v);
+    document.getElementById("secondLargestResult").textContent =
+      secondLargest(arr);
+  }
+
+  function handleCharFreq() {
+    const v = document.getElementById("charFreqInput").value;
+    document.getElementById("charFreqResult").textContent =
+      JSON.stringify(charFrequency(v));
+  }
+
+  function handleSumDigits() {
+    const v = document.getElementById("sumDigitsInput").value;
+    document.getElementById("sumDigitsResult").textContent =
+      sumOfDigits(Number(v));
+  }
+
+  function handleSortWords() {
+    const v = document.getElementById("sortWordsInput").value;
+    document.getElementById("sortWordsResult").textContent = sortWords(v);
+  }
+
+  function handleFindMissing() {
+    const v = document.getElementById("missingInput").value;
+    const arr = parseNumberArray(v);
+    document.getElementById("missingResult").textContent =
+      findMissingNumber(arr);
+  }
+</script>
+
+</body>
+</html>
